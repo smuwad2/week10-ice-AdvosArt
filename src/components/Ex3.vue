@@ -35,13 +35,43 @@
         methods: {
             deletePost(id) {
                 // TODO: Complete the delete method
+                axios.get(`${this.baseUrl}/deletePost`, {
+                    params: {
+                        id: id
+                    }
+                })
+                .then(response => {
+                    // this gets the data, which is an array
+                    console.log(response.data)
+                    //window.location.reload();
+                    for (let i=0; i<this.posts.length; i++) {
+                        let post = this.posts[i];
+                        if (post.id === id) {
+                            this.posts.splice(i, 1);
+                            break;
+                        } 
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
             }
+        },
+        components: {
+            blogPost
         }
     }
 </script>
 
 <template>
    <!-- TODO: make use of the 'blog-post' component to display the blog posts -->
-
+    <blogPost 
+    v-for="post in posts"
+    v-bind:id="post.id"
+    v-bind:subject="post.subject"
+    v-bind:entry="post.entry"
+    v-bind:mood="post.mood">
+        <button class="btn btn-primary" v-on:click="deletePost(post.id)">Delete</button>
+    </blogPost>
 </template>
 
