@@ -19,7 +19,7 @@
    Sound level
     <input type="number" min="0" max="3" v-model="soundLevel"> 
     <!-- TODO: Add Code Here to make use of the component -->
-    <SoundIcon v-bind:soundLvl=soundLevel ></SoundIcon>
+    <SoundIcon v-bind:level="soundLevel" ></SoundIcon>
 
 </template>
 
